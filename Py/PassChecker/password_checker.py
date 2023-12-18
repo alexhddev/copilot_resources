@@ -64,8 +64,6 @@ def validate_password_with_error_messages(password):
     if not any(char in special_chars for char in password):
         raise ValueError(f"Password must contain at least one special character from {special_chars}")
     
-import re
-
 def validate_password_with_error_messages_regex(password):
     """
     Validates a password using regular expressions and raises ValueError with specific error messages for each validation rule.

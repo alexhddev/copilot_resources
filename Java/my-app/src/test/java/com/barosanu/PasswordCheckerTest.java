@@ -47,4 +47,59 @@ public class PasswordCheckerTest {
     public void testNoSpecialCharacter() {
         assertFalse(checker.checkPassword("Abcdefg1"));
     }
+
+    @Test
+    public void testPasswordTooShort() {
+        Exception exception = assertThrows(Exception.class, () -> {
+            checker.checkPasswordAndThrowReason("Abc1!");
+        });
+        assertEquals("Password must be at least 8 characters long", exception.getMessage());
+    }
+
+    @Test
+    public void testPasswordTooLong() {
+        assertThrows(Exception.class, () -> {
+            checker.checkPasswordAndThrowReason("Abcdefg1234567890123456!");
+        });
+    }
+
+    @Test
+    public void testNoLowerCaseLetterWithReason() {
+        Exception exception = assertThrows(Exception.class, () -> {
+            checker.checkPasswordAndThrowReason("ABCDEFG1!");
+        });
+        assertEquals("Password must contain at least one lowercase letter", exception.getMessage());
+    }
+
+    @Test
+    public void testNoUpperCaseLetterWithReason() {
+        Exception exception = assertThrows(Exception.class, () -> {
+            checker.checkPasswordAndThrowReason("abcdefg1!");
+        });
+        assertEquals("Password must contain at least one uppercase letter", exception.getMessage());
+    }
+
+    @Test
+    public void testNoDigitWithReason() {
+        Exception exception = assertThrows(Exception.class, () -> {
+            checker.checkPasswordAndThrowReason("Abcdefg!");
+        });
+        assertEquals("Password must contain at least one digit", exception.getMessage());
+    }
+
+    @Test
+    public void testNoSpecialCharacterWithReason() {
+        Exception exception = assertThrows(Exception.class, () -> {
+            checker.checkPasswordAndThrowReason("Abcdefg1");
+        });
+        assertEquals("Password must contain at least one special character", exception.getMessage());
+    }
+
+    @Test
+    public void testValidPasswordWithReason() {
+        assertDoesNotThrow(() -> {
+            checker.checkPasswordAndThrowReason("Abcdefg1!");
+        });
+    }
+    
 }

@@ -9,13 +9,8 @@ public class EmployeeList {
 
     private List<Employee> employees = new ArrayList<Employee>();
 
-    public EmployeeList() {
-        employees.add(new Employee("John", 23, 2300));
-        employees.add(new Employee("Mary", 28, 2800));
-        employees.add(new Employee("Bob", 39, 3900));
-        employees.add(new Employee("Jane", 29, 2900));
-        employees.add(new Employee("Philip", 33, 3300));
-        employees.add(new Employee("Mary", 28, 2800));
+    public void addEmployee(Employee employee) {
+        employees.add(employee);
     }
 
     public String[] getEmployeesNames() {

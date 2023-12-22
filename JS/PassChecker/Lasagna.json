@@ -1,0 +1,50 @@
+{
+  "lasagna": {
+    "ingredients": [
+      {
+        "name": "lasagna noodles",
+        "quantity": "12"
+      },
+      {
+        "name": "ground beef",
+        "quantity": "1 lb"
+      },
+      {
+        "name": "garlic",
+        "quantity": "2 cloves"
+      },
+      {
+        "name": "tomato sauce",
+        "quantity": "1 can"
+      },
+      {
+        "name": "ricotta cheese",
+        "quantity": "1 cup"
+      },
+      {
+        "name": "mozzarella cheese",
+        "quantity": "2 cups"
+      },
+      {
+        "name": "parmesan cheese",
+        "quantity": "1/2 cup"
+      },
+      {
+        "name": "egg",
+        "quantity": "1"
+      },
+      {
+        "name": "parsley",
+        "quantity": "1 tablespoon"
+      },
+      {
+        "name": "salt",
+        "quantity": "to taste"
+      },
+      {
+        "name": "pepper",
+        "quantity": "to taste"
+      }
+    ]
+  }
+}

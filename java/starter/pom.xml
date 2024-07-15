@@ -1,0 +1,31 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.barosanu</groupId>
+  <artifactId>starter</artifactId>
+  <packaging>jar</packaging>  
+  <properties>
+    <maven.compiler.source>17</maven.compiler.source> <!-- Set Java source compatibility -->
+    <maven.compiler.target>17</maven.compiler.target> <!-- Set Java target compatibility -->
+  </properties>
+  <dependencies>
+    <!-- JUnit Jupiter API for writing tests -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>5.7.0</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- JUnit Jupiter Engine for running tests -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>5.7.0</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <version>1.0-SNAPSHOT</version>
+  <name>starter</name>
+  <url>http://maven.apache.org</url>
+
+</project>

@@ -2,12 +2,15 @@
   "name": "passchecker",
   "version": "1.0.0",
   "main": "PasswordChecker.js",
-  "type":"module",
+  "type": "module",
   "scripts": {
     "test": "node --test"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "typescript": "^5.5.3"
+  }
 }

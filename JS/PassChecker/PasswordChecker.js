@@ -22,7 +22,7 @@ export function checkPassword(password) {
     if(!/[0-9]/.test(password)) {
         throw new Error('Password must contain at least one digit');
     }
-    if(!/[^a-zA-Z0-9]/.test(password)) {
+    if(!/[^a-zA-Z0-9!]/.test(password)) {
         throw new Error('Password must contain at least one special character');
     }
 }

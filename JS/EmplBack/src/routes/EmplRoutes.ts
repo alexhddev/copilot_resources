@@ -20,7 +20,7 @@ export class EmplRoutes {
         this.router.get('/', (req, res) =>{
             this.emplController.getEmployees(req, res);
         });
-        this.router.get('get/:id', (req, res) =>{
+        this.router.get('/get/:id', (req, res) =>{
             this.emplController.getEmployeeById(req, res);
         });
         this.router.post('/add', (req, res) =>{

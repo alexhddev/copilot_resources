@@ -1,11 +1,12 @@
 import { EmplRepository } from "../repository/EmplRepository";
 import { Request, Response } from "express";
+import { InMemoryRepository } from "../repository/InMemoryRepository";
 
 
 
 export class EmplController {
 
-    private repository: EmplRepository = new EmplRepository();
+    private repository: InMemoryRepository = new InMemoryRepository();
 
     public async getEmployees(req: Request, res: Response) {
         try {

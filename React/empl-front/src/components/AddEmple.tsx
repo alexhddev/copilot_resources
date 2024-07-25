@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Home: React.FC = () => {
+const AddEmpl: React.FC = () => {
     return (
         <div>
             <h1>Welcome to the AddEmpl component!</h1>
@@ -8,4 +8,4 @@ const Home: React.FC = () => {
     );
 };
 
-export default Home;
+export default AddEmpl;

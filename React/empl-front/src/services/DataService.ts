@@ -3,7 +3,7 @@ import { Employee } from '../model/Employee';
 const baseUrl = 'http://localhost:3000/empl/';
 
 export async function addEmployee(employee: Partial<Employee>): Promise<void> {
-    const response = await fetch(baseUrl, {
+    const response = await fetch(baseUrl + 'add', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

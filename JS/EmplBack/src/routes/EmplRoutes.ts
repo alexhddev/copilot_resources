@@ -1,5 +1,6 @@
 import express, {Application, Router} from 'express';
 import { EmplController } from '../controllers/EmplController';
+import cors from 'cors'; // Import the cors package
 
 export class EmplRoutes {
 
@@ -10,6 +11,9 @@ export class EmplRoutes {
     constructor(app: Application) {
         this.app = app;
         this.router.use(express.json());
+        this.router.use(cors({
+            origin: '*'
+        })); 
         this.app.use('/empl', this.router);
     }
 

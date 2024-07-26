@@ -24,3 +24,35 @@ export async function getEmployees(): Promise<Employee[]> {
     }
     return response.json();
 }
+
+export async function getEmployee(id: number): Promise<Employee | undefined> {
+    const response = await fetch(baseUrl + 'get/' + id, {
+        method: 'GET'
+    });
+    if (response.status === 404) {
+        return undefined;
+    }
+    const employee = await response.json();
+    return employee;
+}
+
+export async function getEmployeeBio(id: number): Promise<string> {
+    const employee = await getEmployee(id);
+    if (!employee) {
+        return 'No bio available';
+    }
+
+    const bio = `
+        ${employee.firstName} is a highly skilled and dedicated professional with extensive experience in the field. 
+        Over the years, ${employee.firstName} has demonstrated exceptional abilities in various aspects of their role, 
+        consistently delivering outstanding results. With a strong background in ${employee.position}, 
+        ${employee.firstName} has been instrumental in driving key projects and initiatives that have significantly 
+        contributed to the success of the organization. Known for their innovative approach and strategic thinking, 
+        ${employee.firstName} is a valuable asset to the team, always striving for excellence and pushing the boundaries 
+        of what is possible. Outside of work, ${employee.firstName} is passionate about food, travel, and photography,
+        which further showcases their diverse talents and interests. ${employee.firstName}'s commitment to personal 
+        and professional growth is truly inspiring, making them a role model for colleagues and peers alike.
+    `;
+    return bio;
+}
+    

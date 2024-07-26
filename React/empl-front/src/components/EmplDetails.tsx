@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { getEmployee, getEmployeeBio } from '../services/DataService';
 import { Employee } from '../model/Employee';
 
@@ -36,6 +36,8 @@ const EmplDetails = () => {
             <p><strong>Hire date:</strong> {employee.hireDate}</p>
             <br />
             <p><strong>Bio:</strong>{bio}</p>
+            <br />
+            <Link to="/list">Back to list</Link>
 
         </div>
     );

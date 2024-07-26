@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { addEmployee } from '../services/DataService';
 import { Employee } from '../model/Employee';
+import { Link } from 'react-router-dom';
 
 const AddEmpl: React.FC = () => {
     const [firstName, setFirstName] = useState('');
@@ -42,6 +43,7 @@ const AddEmpl: React.FC = () => {
                 onChange={(e) => setPosition(e.target.value)}
             />
             <button onClick={handleAddEmployee}>Add</button>
+            <Link to="/list">Back to list</Link>
         </div>
     );
 };

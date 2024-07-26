@@ -14,3 +14,13 @@ export async function addEmployee(employee: Partial<Employee>): Promise<void> {
         throw new Error('Failed to add employee');
     }
 }
+
+export async function getEmployees(): Promise<Employee[]> {
+    const response = await fetch(baseUrl, {
+        method: 'GET'        
+    });
+    if (!response.ok) {
+        throw new Error('Failed to get employees');
+    }
+    return response.json();
+}

@@ -6,7 +6,7 @@ import { InMemoryRepository } from "../repository/InMemoryRepository";
 
 export class EmplController {
 
-    private repository: InMemoryRepository = new InMemoryRepository();
+    private repository: EmplRepository = new EmplRepository();
 
     public async getEmployees(req: Request, res: Response) {
         try {

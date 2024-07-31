@@ -22,7 +22,22 @@ export async function getEmployees(): Promise<Employee[]> {
     if (!response.ok) {
         throw new Error('Failed to get employees');
     }
-    return response.json();
+    const employees = await response.json();
+    return parseEmployees(employees);
+}
+
+function parseEmployees(data: []): Employee[]{
+    const employees: Employee[] = [];
+    data.forEach((employee: any) => {
+        employees.push({
+            id: employee.id,
+            firstName: employee.first_name,
+            lastName: employee.last_name,
+            hireDate: new String(employee.hire_date).split('T')[0],
+            position: employee.position
+        });
+    });
+    return employees;
 }
 
 export async function getEmployee(id: number): Promise<Employee | undefined> {

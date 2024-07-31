@@ -11,7 +11,7 @@ POST http://localhost:3000/empl/add
 Content-Type: application/json
 
 {
-    "fistName": "John",
+    "firstName": "John",
     "lastName": "Williams",
     "hireDate": "2021-01-01",
     "position": "Software Developer"
@@ -27,5 +27,5 @@ Content-Type: application/json
 }
 ###
 
-DELETE http://localhost:3000/empl/delete/2
+DELETE http://localhost:3000/empl/delete/7
 ###

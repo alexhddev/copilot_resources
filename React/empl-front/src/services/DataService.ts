@@ -29,15 +29,25 @@ export async function getEmployees(): Promise<Employee[]> {
 function parseEmployees(data: []): Employee[]{
     const employees: Employee[] = [];
     data.forEach((employee: any) => {
-        employees.push({
-            id: employee.id,
-            firstName: employee.first_name,
-            lastName: employee.last_name,
-            hireDate: new String(employee.hire_date).split('T')[0],
-            position: employee.position
-        });
+        employees.push(extractEmployee(employee));  
     });
     return employees;
+}
+
+/**
+ * Use for data from SQL databases,
+ * extracts employee data from the given object and returns an Employee object.
+ * @param data - The object containing employee data.
+ * @returns An Employee object with the extracted data.
+ */
+function extractEmployee(data: any): Employee {
+    return {
+        id: data.id,
+        firstName: data.first_name,
+        lastName: data.last_name,
+        hireDate: new String(data.hire_date).split('T')[0],
+        position: data.position
+    };
 }
 
 export async function getEmployee(id: number): Promise<Employee | undefined> {
@@ -48,7 +58,8 @@ export async function getEmployee(id: number): Promise<Employee | undefined> {
         return undefined;
     }
     const employee = await response.json();
-    return employee;
+    const parsedEmployee = extractEmployee(employee);
+    return parsedEmployee;
 }
 
 export async function getEmployeeBio(id: number): Promise<string> {

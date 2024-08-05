@@ -1,0 +1,28 @@
+GET http://localhost:8080/employees/all
+###
+
+GET http://localhost:8080/employees/get?position=Software%20Engineer
+###
+
+POST http://localhost:8080/employees/add
+Content-Type: application/json
+
+{
+    "firstName": "John",
+    "lastName": "Doe",
+    "hireDate": "2021-01-01",
+    "position": "Software Engineer"
+}
+###
+
+PUT http://localhost:8080/employees/7
+Content-Type: application/json
+
+{
+    "position": "Senior Software Engineer"
+}
+
+###
+
+DELETE http://localhost:8080/employees/7
+###

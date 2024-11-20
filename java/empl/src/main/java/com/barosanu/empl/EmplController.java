@@ -34,6 +34,11 @@ public class EmplController {
         return emplService.getEmployeesByPosition(position);
     }
 
+    @GetMapping("/getByFullName")
+    public Employee getEmployeeByFullName(@RequestParam String firstName, @RequestParam String lastName) {
+        return emplService.getEmployeeByFullName(firstName, lastName);
+    }
+
     @PostMapping("/add")
     public Employee addEmployee(@RequestBody Employee employee) {
         return emplService.addEmployee(employee);

@@ -39,4 +39,8 @@ public class EmplService {
     public List<Employee> getEmployeesByPosition(String position){
         return employeeRepository.findByPosition(position);
     }
+
+    public Employee getEmployeeByFullName(String firstName, String lastName) {
+        return employeeRepository.findByFirstNameAndLastName(firstName, lastName);
+    }
 }

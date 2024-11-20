@@ -1,6 +1,9 @@
 GET http://localhost:8080/employees/all
 ###
 
+GET http://localhost:8080/employees/getByFullName?firstName=John&lastName=Doe
+###
+
 GET http://localhost:8080/employees/get?position=Software%20Engineer
 ###
 

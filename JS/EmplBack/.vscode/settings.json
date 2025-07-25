@@ -8,10 +8,5 @@
         {
             "text": "Use single quotes for strings.",
         }
-    ],
-    "github.copilot.chat.testGeneration.instructions": [
-        {
-            "text": "Use single quotes for strings.",
-        }
     ]
 }

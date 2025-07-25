@@ -9,9 +9,7 @@ This project uses JavaScript with the following styles:
 - variables will be camelCase
 - Constants will be in all caps with underscores (i.e. `MAX_USERS`)
 - All functions will be in camelCase
-- All code files will be lower case with underscores.
 - Markdown files will be lower case with hyphens.
-- All code files will be lower case with underscores.
 - Markdown files will be lower case with hyphens.
 
 # Unit tests

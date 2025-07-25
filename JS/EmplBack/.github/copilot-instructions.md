@@ -13,3 +13,11 @@ This project uses JavaScript with the following styles:
 - Markdown files will be lower case with hyphens.
 - All code files will be lower case with underscores.
 - Markdown files will be lower case with hyphens.
+
+# Unit tests
+
+- All unit tests will be in a `tests` directory
+- All unit test files will be lower case with underscores.
+- All unit test files will be named after the file they are testing (i.e. `user.ts` will have a test file named `user.test.ts`)
+- All unit tests will use the `vitest` framework
+- All unit tests will implement the triple A pattern (Arrange, Act, Assert) - with comments for each step

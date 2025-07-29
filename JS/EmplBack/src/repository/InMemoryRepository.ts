@@ -1,4 +1,4 @@
-import { Employee } from '../model/Employee';
+import { type Employee } from '../model/Employee';
 
 export class InMemoryRepository {
 

@@ -13,7 +13,6 @@ logs/
 *.log
 
 # Editor and IDE files
-.vscode/
 .idea/
 
 # Miscellaneous

@@ -1,0 +1,149 @@
+.calendar {
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: #2563eb;
+  color: white;
+}
+
+.calendar-header button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.calendar-header button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.calendar-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background: #f1f5f9;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.weekday {
+  padding: 0.75rem;
+  text-align: center;
+  font-weight: 600;
+  color: #475569;
+  font-size: 0.875rem;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.calendar-day {
+  position: relative;
+  min-height: 80px;
+  padding: 8px;
+  border: 1px solid #e2e8f0;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.calendar-day:hover {
+  background: #f8fafc;
+}
+
+.calendar-day.selected {
+  background: #dbeafe;
+  border-color: #2563eb;
+}
+
+.calendar-day.today {
+  background: #fef3c7;
+  border-color: #f59e0b;
+}
+
+.calendar-day.today.selected {
+  background: #bfdbfe;
+  border-color: #2563eb;
+}
+
+.calendar-day.other-month {
+  color: #9ca3af;
+  background: #f9fafb;
+}
+
+.calendar-day.has-events {
+  background: #f0f9ff;
+}
+
+.calendar-day.has-events.other-month {
+  background: #f3f4f6;
+}
+
+.day-number {
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.event-indicator {
+  margin-top: auto;
+  align-self: flex-end;
+}
+
+.event-count {
+  background: #2563eb;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.calendar-day.other-month .event-count {
+  background: #6b7280;
+}
+
+@media (max-width: 768px) {
+  .calendar {
+    margin: 0 1rem;
+  }
+  
+  .calendar-day {
+    min-height: 60px;
+    padding: 4px;
+  }
+  
+  .calendar-header h2 {
+    font-size: 1.25rem;
+  }
+  
+  .weekday {
+    padding: 0.5rem;
+    font-size: 0.75rem;
+  }
+}

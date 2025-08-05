@@ -3,7 +3,7 @@
  */
 export function startOfDay(date: Date): Date {
     const d = new Date(date);
-    d.setHours(0, 0, 0, 0);
+    d.setUTCHours(0, 0, 0, 0);
     return d;
 }
 
@@ -12,7 +12,7 @@ export function startOfDay(date: Date): Date {
  */
 export function endOfDay(date: Date): Date {
     const d = new Date(date);
-    d.setHours(23, 59, 59, 999);
+    d.setUTCHours(23, 59, 59, 999);
     return d;
 }
 
@@ -21,7 +21,7 @@ export function endOfDay(date: Date): Date {
  */
 export function addDays(date: Date, days: number): Date {
     const d = new Date(date);
-    d.setDate(d.getDate() + days);
+    d.setUTCDate(d.getUTCDate() + days);
     return d;
 }
 
@@ -30,9 +30,9 @@ export function addDays(date: Date, days: number): Date {
  */
 export function isSameDay(date1: Date, date2: Date): boolean {
     return (
-        date1.getFullYear() === date2.getFullYear() &&
-        date1.getMonth() === date2.getMonth() &&
-        date1.getDate() === date2.getDate()
+        date1.getUTCFullYear() === date2.getUTCFullYear() &&
+        date1.getUTCMonth() === date2.getUTCMonth() &&
+        date1.getUTCDate() === date2.getUTCDate()
     );
 }
 
@@ -40,8 +40,8 @@ export function isSameDay(date1: Date, date2: Date): boolean {
  * Formats a date as YYYY-MM-DD.
  */
 export function formatDate(date: Date): string {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
+    const year = date.getUTCFullYear();
+    const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+    const day = String(date.getUTCDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
 }

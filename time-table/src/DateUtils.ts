@@ -45,3 +45,14 @@ export function formatDate(date: Date): string {
     const day = String(date.getUTCDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
 }
+
+/**
+ * Checks if a given string matches the 'YYYY-MM-DD' date format.
+ *
+ * @param dateString - The string to validate as a date.
+ * @returns `true` if the string matches the 'YYYY-MM-DD' format, otherwise `false`.
+ */
+export function isValidDateFormat(dateString: string): boolean {
+    const regex = /^\d{4}-\d{2}-\d{2}$/;
+    return regex.test(dateString);
+}

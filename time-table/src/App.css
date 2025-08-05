@@ -1,12 +1,12 @@
 .app {
   min-height: 100vh;
-  background: #f1f5f9;
+  background: linear-gradient(135deg, #9333ea 0%, #dc2626 50%, #ea580c 100%);
 }
 
 .app-header {
   text-align: center;
   padding: 2rem 1rem;
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  background: transparent;
   color: white;
   margin-bottom: 2rem;
 }
@@ -36,6 +36,24 @@
 .events-section {
   display: flex;
   flex-direction: column;
+}
+
+.calendar-section {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  padding: 0;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.events-section {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  padding: 0;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 @media (max-width: 1024px) {

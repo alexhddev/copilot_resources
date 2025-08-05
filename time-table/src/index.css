@@ -21,7 +21,7 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background: #f1f5f9;
+  background: linear-gradient(45deg, #fef3c7 0%, #fde68a 25%, #fed7aa 50%, #fecaca 75%, #e0e7ff 100%);
 }
 
 #root {

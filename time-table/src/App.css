@@ -1,20 +1,35 @@
 .app {
   min-height: 100vh;
-  background: #f1f5f9;
+  background: linear-gradient(45deg, #fef3c7 0%, #fde68a 25%, #fed7aa 50%, #fecaca 75%, #e0e7ff 100%);
 }
 
 .app-header {
   text-align: center;
   padding: 2rem 1rem;
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  background: linear-gradient(135deg, #7c3aed 0%, #dc2626 50%, #ea580c 100%);
   color: white;
   margin-bottom: 2rem;
+  box-shadow: 0 10px 25px rgba(124, 58, 237, 0.3);
+  border-radius: 0 0 2rem 2rem;
+  position: relative;
+  overflow: hidden;
 }
 
 .app-header h1 {
   margin: 0 0 0.5rem 0;
   font-size: 2.5rem;
   font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  animation: pulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+  from {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  to {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 255, 255, 0.5);
+  }
 }
 
 .app-header p {
@@ -36,6 +51,49 @@
 .events-section {
   display: flex;
   flex-direction: column;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 8px 32px rgba(124, 58, 237, 0.15);
+  backdrop-filter: blur(10px);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  position: relative;
+  overflow: hidden;
+}
+
+.calendar-section::before,
+.events-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, #7c3aed, #dc2626, #ea580c, #7c3aed);
+  background-size: 400% 400%;
+  animation: gradient 8s ease infinite;
+  z-index: -1;
+  border-radius: inherit;
+}
+
+.calendar-section::after,
+.events-section::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: calc(1.5rem - 2px);
+  z-index: -1;
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 @media (max-width: 1024px) {

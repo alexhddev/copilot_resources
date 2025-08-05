@@ -1,10 +1,33 @@
 .calendar {
   max-width: 800px;
   margin: 0 auto;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px rgba(124, 58, 237, 0.2);
   overflow: hidden;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  position: relative;
+}
+
+.calendar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, #7c3aed, #ea580c, #dc2626, #7c3aed);
+  background-size: 400% 400%;
+  animation: calendarGradient 6s ease infinite;
+  z-index: -1;
+  border-radius: inherit;
+}
+
+@keyframes calendarGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .calendar-header {
@@ -12,23 +35,28 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background: #2563eb;
+  background: linear-gradient(135deg, #7c3aed 0%, #dc2626 50%, #ea580c 100%);
   color: white;
+  position: relative;
 }
 
 .calendar-header button {
-  background: none;
-  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
   color: white;
   font-size: 1.2rem;
   cursor: pointer;
   padding: 0.5rem;
-  border-radius: 4px;
-  transition: background-color 0.2s;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
 }
 
 .calendar-header button:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
 }
 
 .calendar-header h2 {
@@ -40,16 +68,17 @@
 .calendar-weekdays {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  background: #f1f5f9;
-  border-bottom: 1px solid #e2e8f0;
+  background: linear-gradient(90deg, #fef3c7, #fed7aa, #fecaca);
+  border-bottom: 2px solid #ea580c;
 }
 
 .weekday {
   padding: 0.75rem;
   text-align: center;
   font-weight: 600;
-  color: #475569;
+  color: #7c2d12;
   font-size: 0.875rem;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
 }
 
 .calendar-grid {
@@ -70,22 +99,33 @@
 }
 
 .calendar-day:hover {
-  background: #f8fafc;
+  background: linear-gradient(135deg, #fef3c7, #fed7aa);
+  transform: scale(1.02);
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.2);
 }
 
 .calendar-day.selected {
-  background: #dbeafe;
-  border-color: #2563eb;
+  background: linear-gradient(135deg, #ddd6fe, #fde68a);
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 2px #7c3aed;
 }
 
 .calendar-day.today {
-  background: #fef3c7;
-  border-color: #f59e0b;
+  background: linear-gradient(135deg, #fed7aa, #fecaca);
+  border-color: #ea580c;
+  box-shadow: 0 0 0 2px #ea580c;
+  animation: todayPulse 3s ease-in-out infinite;
+}
+
+@keyframes todayPulse {
+  0%, 100% { box-shadow: 0 0 0 2px #ea580c; }
+  50% { box-shadow: 0 0 0 4px #ea580c, 0 0 20px rgba(234, 88, 12, 0.3); }
 }
 
 .calendar-day.today.selected {
-  background: #bfdbfe;
-  border-color: #2563eb;
+  background: linear-gradient(135deg, #c084fc, #fde68a);
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 2px #7c3aed;
 }
 
 .calendar-day.other-month {
@@ -94,11 +134,11 @@
 }
 
 .calendar-day.has-events {
-  background: #f0f9ff;
+  background: linear-gradient(135deg, #e0e7ff, #fef3c7);
 }
 
 .calendar-day.has-events.other-month {
-  background: #f3f4f6;
+  background: linear-gradient(135deg, #f3f4f6, #fef3c7);
 }
 
 .day-number {
@@ -112,20 +152,27 @@
 }
 
 .event-count {
-  background: #2563eb;
+  background: linear-gradient(135deg, #7c3aed, #dc2626);
   color: white;
   border-radius: 50%;
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.75rem;
   font-weight: 600;
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.4);
+  animation: eventBounce 2s ease-in-out infinite;
+}
+
+@keyframes eventBounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
 }
 
 .calendar-day.other-month .event-count {
-  background: #6b7280;
+  background: linear-gradient(135deg, #6b7280, #9ca3af);
 }
 
 @media (max-width: 768px) {

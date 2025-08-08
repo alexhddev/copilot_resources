@@ -1,0 +1,13 @@
+{
+    "github.copilot.chat.commitMessageGeneration.instructions": [
+        {
+            "text": "Add emojis to the commit message to make it more engaging and visually appealing. Use relevant emojis that match the context of the changes made in the code.",
+        }
+    ],
+    "github.copilot.chat.reviewSelection.instructions": [
+        {
+            "text": "Use single quotes for strings.",
+            "file":"guidance/review-guidelines.md"
+        }
+    ]
+}

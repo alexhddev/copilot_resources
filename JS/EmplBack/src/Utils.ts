@@ -1,5 +1,5 @@
 
 
-const toArray = (args: string) =>{
-    return args.split(',').map(item => item.trim());
-} 
+function toArray(str: string) {
+    return str.split(',').map(item => item.trim());
+}

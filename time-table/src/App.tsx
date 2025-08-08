@@ -1,8 +1,17 @@
+
 import { useState } from 'react';
 import { Calendar } from './components/Calendar';
 import { EventManager } from './components/EventManager';
 import './App.css';
 
+/**
+ * The main application component for the Time Table app.
+ *
+ * Renders the header, calendar, and event manager sections.
+ * Manages the selected date and triggers refreshes when events change.
+ *
+ * @component
+ */
 function App() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [refreshKey, setRefreshKey] = useState(0);

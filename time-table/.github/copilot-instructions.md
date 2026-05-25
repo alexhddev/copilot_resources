@@ -12,7 +12,9 @@ This document defines coding standards, patterns, and conventions for the Time-T
 - **Provide JSDoc comments** on all utility functions with `@param` and `@returns` tags documenting parameter and return types.
 - **Enable strict TypeScript mode** - all files should compile without errors in strict mode.
 
+## React Components & Hooks
 
+See [instructions/react.instructions.md](instructions/react.instructions.md) for detailed React component coding standards.
 
 ## Naming Conventions
 

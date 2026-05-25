@@ -1,3 +1,8 @@
+---
+applyTo: "src/components/**/*.tsx"
+description: "React component coding standards and best practices"
+---
+
 ## React Components & Hooks
 
 - **Use functional components only** with `React.FC<Props>` pattern (no class components).

@@ -1,0 +1,23 @@
+.cool-label {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+}
+
+.cool-label--primary {
+  background-color: #007bff;
+  color: #ffffff;
+}
+
+.cool-label--secondary {
+  background-color: #6c757d;
+  color: #ffffff;
+}
+
+.cool-label--accent {
+  background-color: #ff6b6b;
+  color: #ffffff;
+}

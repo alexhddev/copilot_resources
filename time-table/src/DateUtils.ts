@@ -35,24 +35,3 @@ export function isSameDay(date1: Date, date2: Date): boolean {
         date1.getUTCDate() === date2.getUTCDate()
     );
 }
-
-/**
- * Formats a date as YYYY-MM-DD.
- */
-export function formatDate(date: Date): string {
-    const year = date.getUTCFullYear();
-    const month = String(date.getUTCMonth() + 1).padStart(2, '0');
-    const day = String(date.getUTCDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
-}
-
-/**
- * Checks if a given string matches the 'YYYY-MM-DD' date format.
- *
- * @param dateString - The string to validate as a date.
- * @returns `true` if the string matches the 'YYYY-MM-DD' format, otherwise `false`.
- */
-export function isValidDateFormat(dateString: string): boolean {
-    const regex = /^\d{4}-\d{2}-\d{2}$/;
-    return regex.test(dateString);
-}

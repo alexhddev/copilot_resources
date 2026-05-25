@@ -10,7 +10,7 @@ export function startOfDay(date: Date): Date {
 /**
  * Returns a new Date object with the time set to the end of the day (23:59:59.999).
  */
-export function endOfDay(date: Date): Date {
+export function endOfDay(date: Date) {
     const d = new Date(date);
     d.setUTCHours(23, 59, 59, 999);
     return d;

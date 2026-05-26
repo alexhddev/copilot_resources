@@ -1,0 +1,11 @@
+{
+    "version": 1,
+    "hooks": {
+        "userPromptSubmitted": [
+            {
+                "type": "command",
+                "powershell": "echo 'Hello, World!'"
+            }
+        ]
+    }
+}

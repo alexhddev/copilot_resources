@@ -1,0 +1,12 @@
+{
+    "version": 1,
+    "hooks": {
+        "sessionStart": [
+            {
+                "type": "command",
+                "command": "node scripts/injectNodeVersion.js",
+                "cwd": ".github/hooks"
+            }
+        ]
+    }
+}

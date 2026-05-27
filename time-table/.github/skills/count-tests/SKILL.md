@@ -5,8 +5,7 @@ description: Use this skill when the user asks to count tests, summarize the tes
 
 # Count Tests
 
-1. Run the [script](./scripts/count-tests.js) using Node.js, passing the project root directory as an argument:
-   `node .github/skills/count-tests/scripts/count-tests.js .`
+1. Run the [script](./scripts/count-tests.js) using Node.js to count the number of tests in the project and gather relevant information about the test suite.
 
 2. Parse the JSON output from the script.
 

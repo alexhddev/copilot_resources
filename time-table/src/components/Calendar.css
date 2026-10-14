@@ -12,7 +12,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background: linear-gradient(135deg, #9333ea 0%, #dc2626 50%, #ea580c 100%);
+  background: linear-gradient(135deg, #93c5fd 0%, #60a5fa 50%, #3b82f6 100%);
   color: white;
 }
 
@@ -75,20 +75,20 @@
 }
 
 .calendar-day.selected {
-  background: rgba(147, 51, 234, 0.2);
-  border-color: #9333ea;
+  background: rgba(59, 130, 246, 0.2);
+  border-color: var(--color-primary);
   border-width: 2px;
 }
 
 .calendar-day.today {
-  background: rgba(234, 88, 12, 0.3);
-  border-color: #ea580c;
+  background: rgba(147, 197, 253, 0.4);
+  border-color: #60a5fa;
   border-width: 2px;
 }
 
 .calendar-day.today.selected {
-  background: rgba(147, 51, 234, 0.3);
-  border-color: #9333ea;
+  background: rgba(59, 130, 246, 0.3);
+  border-color: var(--color-primary);
 }
 
 .calendar-day.other-month {
@@ -97,7 +97,7 @@
 }
 
 .calendar-day.has-events {
-  background: rgba(147, 51, 234, 0.1);
+  background: rgba(59, 130, 246, 0.1);
 }
 
 .calendar-day.has-events.other-month {
@@ -115,7 +115,7 @@
 }
 
 .event-count {
-  background: #9333ea;
+  background: var(--color-primary);
   color: white;
   border-radius: 50%;
   width: 20px;

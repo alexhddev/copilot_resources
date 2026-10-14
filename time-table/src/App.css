@@ -1,13 +1,13 @@
 .app {
   min-height: 100vh;
-  background: linear-gradient(135deg, #9333ea 0%, #dc2626 50%, #ea580c 100%);
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 50%, #eff6ff 100%);
 }
 
 .app-header {
   text-align: center;
   padding: 2rem 1rem;
   background: transparent;
-  color: white;
+  color: #1e3a8a;
   margin-bottom: 2rem;
 }
 

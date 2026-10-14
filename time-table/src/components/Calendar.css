@@ -13,13 +13,13 @@
   align-items: center;
   padding: 1rem;
   background: linear-gradient(135deg, #93c5fd 0%, #60a5fa 50%, #3b82f6 100%);
-  color: white;
+  color: #1e3a8a;
 }
 
 .calendar-header button {
   background: none;
   border: none;
-  color: white;
+  color: #1e3a8a;
   font-size: 1.2rem;
   cursor: pointer;
   padding: 0.5rem;

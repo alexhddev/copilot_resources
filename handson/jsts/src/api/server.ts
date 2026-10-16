@@ -1,7 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express';
 import path from 'path';
 import { order } from '../model/Model';
-import { dailyMenu, findOrderById, addOrder, updateOrderById } from './database';
+import { dailyMenu, orders, findOrderById, addOrder, updateOrderById, deleteOrderById } from './database';
 
 // Token payload: base64({"role":"admin"})
 // To generate: Buffer.from(JSON.stringify({ role: 'admin' })).toString('base64')
@@ -35,7 +35,7 @@ app.use(express.static(path.join(__dirname, '../ui')));
 // CORS middleware for development
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, OPTIONS');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
     
     if (req.method === 'OPTIONS') {
@@ -60,6 +60,23 @@ app.get('/api/daily-menu', (req, res) => {
             success: false,
             error: 'Internal server error',
             message: 'Failed to retrieve daily menu'
+        });
+    }
+});
+
+// GET /api/orders - List all orders
+app.get('/api/orders', (req, res) => {
+    try {
+        res.status(200).json({
+            success: true,
+            data: orders,
+            message: 'Orders retrieved successfully'
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: 'Internal server error',
+            message: 'Failed to retrieve orders'
         });
     }
 });
@@ -266,6 +283,43 @@ app.put('/api/orders/:id', (req, res) => {
             success: false,
             error: 'Internal server error',
             message: 'Failed to update order'
+        });
+    }
+});
+
+// DELETE /api/orders/:id - Delete an order
+app.delete('/api/orders/:id', (req, res) => {
+    try {
+        const { id } = req.params;
+
+        if (!id) {
+            return res.status(400).json({
+                success: false,
+                error: 'Bad request',
+                message: 'Order ID is required'
+            });
+        }
+
+        const deletedOrder = deleteOrderById(id);
+
+        if (!deletedOrder) {
+            return res.status(404).json({
+                success: false,
+                error: 'Not found',
+                message: `Order with ID '${id}' not found`
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            data: deletedOrder,
+            message: 'Order deleted successfully'
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: 'Internal server error',
+            message: 'Failed to delete order'
         });
     }
 });

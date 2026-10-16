@@ -82,6 +82,16 @@ export const updateOrderById = (id: string, updatedOrder: Partial<order>): order
     return orders[index];
 };
 
+// Helper function to delete order by ID
+export const deleteOrderById = (id: string): order | null => {
+    const index = orders.findIndex(order => order.id === id);
+    if (index === -1) {
+        return null;
+    }
+
+    return orders.splice(index, 1)[0];
+};
+
 // Helper function to add new order
 export const addOrder = (orderData: Omit<order, 'id'>): order => {
     const newOrder: order = {

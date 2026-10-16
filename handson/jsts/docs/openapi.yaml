@@ -43,6 +43,30 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
 
   /api/orders:
+    get:
+      tags: [Orders]
+      summary: List all orders
+      operationId: listOrders
+      responses:
+        '200':
+          description: Orders retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Order'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
     post:
       tags: [Orders]
       summary: Create a new order
@@ -141,6 +165,42 @@ paths:
                         $ref: '#/components/schemas/Order'
         '400':
           description: Bad request - invalid update data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '404':
+          description: Order not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+    delete:
+      tags: [Orders]
+      summary: Delete an order
+      operationId: deleteOrder
+      parameters:
+        - $ref: '#/components/parameters/OrderId'
+      responses:
+        '200':
+          description: Order deleted successfully (returns the deleted order)
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/Order'
+        '400':
+          description: Bad request - order ID is required
           content:
             application/json:
               schema:

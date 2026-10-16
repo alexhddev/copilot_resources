@@ -2,7 +2,7 @@
   "name": "awesome-pizza-jsts",
   "version": "1.0.0",
   "scripts": {
-    "start": "tsx src/api/server.ts"
+    "start": "tsx --env-file-if-exists=.env src/api/server.ts"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@types/express": "^5.0.6",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "mysql2": "^3.24.6"
   }
 }

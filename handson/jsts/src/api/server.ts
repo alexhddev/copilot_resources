@@ -1,7 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express';
 import path from 'path';
 import { order } from '../model/Model';
-import { dailyMenu, orders, findOrderById, addOrder, updateOrderById, deleteOrderById } from './database';
+import { initDatabase, getDailyMenu, getOrders, findOrderById, addOrder, updateOrderById, deleteOrderById } from './database';
 
 // Token payload: base64({"role":"admin"})
 // To generate: Buffer.from(JSON.stringify({ role: 'admin' })).toString('base64')
@@ -48,11 +48,11 @@ app.use((req, res, next) => {
 // API Routes
 
 // GET /api/daily-menu - Return the daily menu
-app.get('/api/daily-menu', (req, res) => {
+app.get('/api/daily-menu', async (req, res) => {
     try {
         res.status(200).json({
             success: true,
-            data: dailyMenu,
+            data: await getDailyMenu(),
             message: 'Daily menu retrieved successfully'
         });
     } catch (error) {
@@ -65,11 +65,11 @@ app.get('/api/daily-menu', (req, res) => {
 });
 
 // GET /api/orders - List all orders
-app.get('/api/orders', (req, res) => {
+app.get('/api/orders', async (req, res) => {
     try {
         res.status(200).json({
             success: true,
-            data: orders,
+            data: await getOrders(),
             message: 'Orders retrieved successfully'
         });
     } catch (error) {
@@ -82,7 +82,7 @@ app.get('/api/orders', (req, res) => {
 });
 
 // GET /api/orders/:id - Get order by ID
-app.get('/api/orders/:id', (req, res) => {
+app.get('/api/orders/:id', async (req, res) => {
     try {
         const { id } = req.params;
         
@@ -94,7 +94,7 @@ app.get('/api/orders/:id', (req, res) => {
             });
         }
 
-        const order = findOrderById(id);
+        const order = await findOrderById(id);
         
         if (!order) {
             return res.status(404).json({
@@ -119,7 +119,7 @@ app.get('/api/orders/:id', (req, res) => {
 });
 
 // POST /api/orders - Create a new order
-app.post('/api/orders', (req, res) => {
+app.post('/api/orders', async (req, res) => {
     try {
         const { sender, contents } = req.body;
 
@@ -166,7 +166,7 @@ app.post('/api/orders', (req, res) => {
             contents: contents
         };
 
-        const newOrder = addOrder(orderData);
+        const newOrder = await addOrder(orderData);
 
         res.status(201).json({
             success: true,
@@ -183,7 +183,7 @@ app.post('/api/orders', (req, res) => {
 });
 
 // PUT /api/orders/:id - Update an existing order
-app.put('/api/orders/:id', (req, res) => {
+app.put('/api/orders/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const { sender, status, contents } = req.body;
@@ -197,7 +197,7 @@ app.put('/api/orders/:id', (req, res) => {
         }
 
         // Check if order exists
-        const existingOrder = findOrderById(id);
+        const existingOrder = await findOrderById(id);
         if (!existingOrder) {
             return res.status(404).json({
                 success: false,
@@ -263,7 +263,7 @@ app.put('/api/orders/:id', (req, res) => {
         }
 
         // Update the order
-        const updatedOrder = updateOrderById(id, updateData);
+        const updatedOrder = await updateOrderById(id, updateData);
 
         if (!updatedOrder) {
             return res.status(500).json({
@@ -288,7 +288,7 @@ app.put('/api/orders/:id', (req, res) => {
 });
 
 // DELETE /api/orders/:id - Delete an order
-app.delete('/api/orders/:id', (req, res) => {
+app.delete('/api/orders/:id', async (req, res) => {
     try {
         const { id } = req.params;
 
@@ -300,7 +300,7 @@ app.delete('/api/orders/:id', (req, res) => {
             });
         }
 
-        const deletedOrder = deleteOrderById(id);
+        const deletedOrder = await deleteOrderById(id);
 
         if (!deletedOrder) {
             return res.status(404).json({
@@ -376,8 +376,15 @@ app.get('/api/admin', (req, res) => {
 });
 
 // Start server
-app.listen(PORT, () => {
-    console.log(`🍕 Awesome Pizza API server running on port ${PORT}`);
-});
+initDatabase()
+    .then(() => {
+        app.listen(PORT, () => {
+            console.log(`🍕 Awesome Pizza API server running on port ${PORT}`);
+        });
+    })
+    .catch(error => {
+        console.error('Failed to initialise MySQL database:', error);
+        process.exit(1);
+    });
 
 export default app;

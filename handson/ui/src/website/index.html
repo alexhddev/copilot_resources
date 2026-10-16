@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awesome Pizza - Order Online</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍕</text></svg>">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container" style="position:relative;">
+            <div class="header-top">
+                <h1>🍕 Awesome Pizza</h1>
+            </div>
+            <p>Delicious pizzas delivered to your door!</p>
+            <div class="header-controls">
+                <button id="theme-toggle" class="theme-toggle" style="position:static;" aria-label="Toggle dark theme">🌙</button>
+                <a href="/login.html" class="login-link">🔒 Login</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Menu Section -->
+        <section id="menu-section">
+            <h2>Today's Menu</h2>
+            <div id="menu-container" class="menu-grid">
+                <!-- Menu items will be loaded here -->
+            </div>
+        </section>
+
+        <!-- Order Section -->
+        <section id="order-section">
+            <h2>Your Order</h2>
+            <div class="order-form">
+                <div class="form-group">
+                    <label for="customer-name">Your Name:</label>
+                    <input type="text" id="customer-name" placeholder="Enter your name" required>
+                </div>
+                
+                <div id="cart" class="cart">
+                    <h3>Cart</h3>
+                    <div id="cart-items">
+                        <p class="empty-cart">Your cart is empty</p>
+                    </div>
+                    <div class="cart-total">
+                        <strong>Total Items: <span id="total-items">0</span></strong>
+                    </div>
+                </div>
+
+                <button id="place-order-btn" class="btn-primary" disabled>Place Order</button>
+            </div>
+        </section>
+
+        <!-- Orders Management Section -->
+        <section id="orders-section">
+            <h2>Order Management</h2>
+            <div class="order-lookup">
+                <div class="form-group">
+                    <label for="order-id">Order ID:</label>
+                    <input type="text" id="order-id" placeholder="Enter order ID">
+                    <button id="lookup-order-btn" class="btn-secondary">Look Up Order</button>
+                </div>
+            </div>
+            
+            <div id="order-details" class="order-details" style="display: none;">
+                <!-- Order details will be displayed here -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Success/Error Messages -->
+    <div id="notification" class="notification"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

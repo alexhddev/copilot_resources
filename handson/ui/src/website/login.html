@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awesome Pizza - Login</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍕</text></svg>">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <h1>🍕 Awesome Pizza</h1>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark theme">🌙</button>
+            </div>
+            <p>Staff login</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="login-overlay">
+            <div class="login-card">
+                <h2>🔒 Login</h2>
+                <p>Sign in to access the protected area</p>
+                <div class="form-group">
+                    <label for="login-username">Username:</label>
+                    <input type="text" id="login-username" placeholder="Enter username" autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password:</label>
+                    <input type="password" id="login-password" placeholder="Enter password" autocomplete="current-password">
+                </div>
+                <div id="login-error" class="login-error" style="display:none;"></div>
+                <button id="login-btn" class="btn-primary" style="width:100%;">Login</button>
+                <p class="login-hint">Hint: use <strong>user</strong> / <strong>pass</strong></p>
+            </div>
+        </div>
+    </main>
+
+    <script src="login.js"></script>
+</body>
+</html>

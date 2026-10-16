@@ -1,0 +1,28 @@
+{
+  "name": "awesome-pizza-jsts",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "tsx src/api/server.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexhddev/awesome-pizza.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/alexhddev/awesome-pizza/issues"
+  },
+  "homepage": "https://github.com/alexhddev/awesome-pizza#readme",
+  "devDependencies": {
+    "@types/node": "^26.1.1",
+    "tsx": "^4.23.1",
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "@types/express": "^5.0.6",
+    "express": "^5.2.1"
+  }
+}

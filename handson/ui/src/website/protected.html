@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awesome Pizza - Protected</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍕</text></svg>">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <button id="logout-btn" class="logout-btn" style="display:none">🚪 Logout</button>
+                <h1>🍕 Awesome Pizza</h1>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark theme">🌙</button>
+            </div>
+            <p>Staff area</p>
+        </div>
+    </header>
+
+    <main class="container" id="main-content" style="display:none">
+        <section id="protected-section">
+            <h2>🔑 Protected Area</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Welcome! You are logged in. Here is the secret staff data.</p>
+            <p id="auth-required-msg" style="display:none; color: var(--text-secondary);">🔒 This page is only visible to logged-in users. <a href="login.html">Log in</a> to continue.</p>
+            <div id="protected-data"></div>
+        </section>
+    </main>
+
+    <script src="protected.js"></script>
+</body>
+</html>

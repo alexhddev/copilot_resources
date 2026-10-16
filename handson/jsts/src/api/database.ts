@@ -92,14 +92,3 @@ export const addOrder = (orderData: Omit<order, 'id'>): order => {
     orders.push(newOrder);
     return newOrder;
 };
-
-// Helper function to delete order by ID
-export const deleteOrderById = (id: string): boolean => {
-    const index = orders.findIndex(order => order.id === id);
-    if (index === -1) {
-        return false;
-    }
-    
-    orders.splice(index, 1);
-    return true;
-};

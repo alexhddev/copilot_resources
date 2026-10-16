@@ -8,7 +8,7 @@ Minimal Spring Boot port of the `jsts` Awesome Pizza API, providing feature pari
 mvn spring-boot:run
 ```
 
-The server starts on port `3000` (override with the `PORT` environment variable) and exposes the same endpoints as `jsts`/`py`:
+The server starts on port `3000` (override with the `PORT` environment variable) and exposes the same endpoints as `dotnet`/`jsts`/`py`:
 
 - `GET /api/daily-menu`
 - `GET /api/orders/{id}`

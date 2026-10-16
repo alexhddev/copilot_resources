@@ -157,43 +157,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
-    delete:
-      tags: [Orders]
-      summary: Delete an order
-      operationId: deleteOrder
-      parameters:
-        - $ref: '#/components/parameters/OrderId'
-      responses:
-        '200':
-          description: Order deleted successfully
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/ApiResponse'
-                  - type: object
-                    properties:
-                      data:
-                        type: null
-                        nullable: true
-        '400':
-          description: Bad request - order ID is required
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        '404':
-          description: Order not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        '500':
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
 
   /api/login:
     post:

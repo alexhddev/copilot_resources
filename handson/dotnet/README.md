@@ -1,6 +1,6 @@
 # awesome-pizza-dotnet
 
-Minimal ASP.NET Core (.NET 8) port of the `jsts` Awesome Pizza API, providing feature parity for the daily menu, order management, and authentication endpoints.
+Minimal ASP.NET Core (.NET 10) port of the `jsts` Awesome Pizza API, providing feature parity for the daily menu, order management, and authentication endpoints.
 
 ## Run
 

@@ -7,7 +7,7 @@ Sample projects for learning and practicing **GitHub Copilot**: a multi-language
 ```
 copilot_resources/
 ├── handson/        # "Awesome Pizza": one API in four stacks, plus a web frontend
-│   ├── dotnet/     # ASP.NET Core (.NET 8)
+│   ├── dotnet/     # ASP.NET Core (.NET 10)
 │   ├── java/       # Spring Boot (Maven)
 │   ├── jsts/       # Node.js + Express (TypeScript)
 │   ├── py/         # FastAPI (Python)
@@ -80,7 +80,7 @@ See [time-table/README.md](time-table/README.md) for more about the app.
 Install only the tools for the parts you want to run:
 
 - [Node.js](https://nodejs.org/) (for `jsts`, `ui` and `time-table`)
-- [.NET 8 SDK](https://dotnet.microsoft.com/download) (for `dotnet`)
-- Java with [Maven](https://maven.apache.org/) (for `java`)
+- [.NET 10 SDK](https://dotnet.microsoft.com/download) (for `dotnet`)
+- Java 17+ with [Maven](https://maven.apache.org/) (for `java`)
 - [Python 3](https://www.python.org/) (for `py`)
 - [VS Code](https://code.visualstudio.com/) with GitHub Copilot (for the customization examples)

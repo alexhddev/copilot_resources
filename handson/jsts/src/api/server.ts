@@ -22,6 +22,26 @@ function requireToken(req: Request, res: Response, next: NextFunction): void {
     next();
 }
 
+// Returns an error message for the first invalid order item, or null when all items are valid
+function validateOrderItems(contents: unknown[]): string | null {
+    for (const item of contents) {
+        if (typeof item !== 'object' || item === null) {
+            return 'Each order item must be an object';
+        }
+
+        const { name, quantity } = item as { name?: unknown, quantity?: unknown };
+
+        if (!name || typeof name !== 'string' || name.trim() === '') {
+            return 'Each order item must have a valid name';
+        }
+
+        if (typeof quantity !== 'number' || !Number.isInteger(quantity) || quantity <= 0) {
+            return 'Each order item must have a valid quantity (positive integer)';
+        }
+    }
+    return null;
+}
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -140,23 +160,13 @@ app.post('/api/orders', async (req, res) => {
             });
         }
 
-        // Validate each item in contents
-        for (const item of contents) {
-            if (!item.name || typeof item.name !== 'string' || item.name.trim() === '') {
-                return res.status(400).json({
-                    success: false,
-                    error: 'Bad request',
-                    message: 'Each order item must have a valid name'
-                });
-            }
-
-            if (!item.quantity || typeof item.quantity !== 'number' || item.quantity <= 0) {
-                return res.status(400).json({
-                    success: false,
-                    error: 'Bad request',
-                    message: 'Each order item must have a valid quantity (positive number)'
-                });
-            }
+        const itemError = validateOrderItems(contents);
+        if (itemError) {
+            return res.status(400).json({
+                success: false,
+                error: 'Bad request',
+                message: itemError
+            });
         }
 
         // Create new order with default status
@@ -241,23 +251,13 @@ app.put('/api/orders/:id', async (req, res) => {
                 });
             }
 
-            // Validate each item in contents
-            for (const item of contents) {
-                if (!item.name || typeof item.name !== 'string' || item.name.trim() === '') {
-                    return res.status(400).json({
-                        success: false,
-                        error: 'Bad request',
-                        message: 'Each order item must have a valid name'
-                    });
-                }
-
-                if (!item.quantity || typeof item.quantity !== 'number' || item.quantity <= 0) {
-                    return res.status(400).json({
-                        success: false,
-                        error: 'Bad request',
-                        message: 'Each order item must have a valid quantity (positive number)'
-                    });
-                }
+            const itemError = validateOrderItems(contents);
+            if (itemError) {
+                return res.status(400).json({
+                    success: false,
+                    error: 'Bad request',
+                    message: itemError
+                });
             }
             updateData.contents = contents;
         }
@@ -329,49 +329,78 @@ const USERS = [{ username: 'user', password: 'pass' }];
 
 // POST /api/login - Validate credentials and return a token
 app.post('/api/login', (req, res) => {
-    const { username, password } = req.body;
-    const match = USERS.find(u => u.username === username && u.password === password);
-    if (!match) {
-        res.status(401).json({ success: false, error: 'Invalid credentials' });
-        return;
+    try {
+        const { username, password } = req.body ?? {};
+        const match = USERS.find(u => u.username === username && u.password === password);
+        if (!match) {
+            res.status(401).json({ success: false, error: 'Invalid credentials' });
+            return;
+        }
+        res.status(200).json({ success: true, token: HARDCODED_TOKEN });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: 'Internal server error',
+            message: 'Failed to process login'
+        });
     }
-    res.status(200).json({ success: true, token: HARDCODED_TOKEN });
 });
 
 // GET /api/protected - Requires a valid token
 app.get('/api/protected', requireToken, (_req, res) => {
-    res.status(200).json({
-        success: true,
-        message: 'Access granted',
-        data: {
-            secretRecipes: ['Margherita Supreme', 'Dragon Pepperoni', 'Black Truffle Delight'],
-            staffDiscount: '50% off all pizzas',
-            vipCode: 'PIZZA-VIP-2024',
-            deliveryNote: 'Drivers use entrance B'
-        }
-    });
+    try {
+        res.status(200).json({
+            success: true,
+            message: 'Access granted',
+            data: {
+                secretRecipes: ['Margherita Supreme', 'Dragon Pepperoni', 'Black Truffle Delight'],
+                staffDiscount: '50% off all pizzas',
+                vipCode: 'PIZZA-VIP-2024',
+                deliveryNote: 'Drivers use entrance B'
+            }
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: 'Internal server error',
+            message: 'Failed to retrieve protected content'
+        });
+    }
 });
 
 // GET /api/admin - Decodes token and checks for role: admin
 app.get('/api/admin', (req, res) => {
-    const token = extractBearerToken(req);
-    if (!token) {
-        res.status(401).json({ success: false, error: 'Unauthorized', message: 'Token required' });
-        return;
-    }
-
-    let payload: { role?: string };
     try {
-        payload = JSON.parse(Buffer.from(token, 'base64').toString('utf8'));
-    } catch {
-        res.status(401).json({ success: false, error: 'Unauthorized', message: 'Invalid token format' });
-        return;
-    }
+        const token = extractBearerToken(req);
+        if (!token) {
+            res.status(401).json({ success: false, error: 'Unauthorized', message: 'Token required' });
+            return;
+        }
 
-    if (payload.role === 'admin') {
-        res.status(200).json({ success: true, message: 'Welcome, admin!' });
-    } else {
-        res.status(403).json({ success: false, error: 'Forbidden', message: 'Not authorised' });
+        let payload: { role?: string } | null;
+        try {
+            payload = JSON.parse(Buffer.from(token, 'base64').toString('utf8'));
+        } catch {
+            res.status(401).json({ success: false, error: 'Unauthorized', message: 'Invalid token format' });
+            return;
+        }
+
+        if (typeof payload !== 'object' || payload === null) {
+            res.status(401).json({ success: false, error: 'Unauthorized', message: 'Invalid token format' });
+            return;
+        }
+
+        if (payload.role === 'admin') {
+            res.status(200).json({ success: true, message: 'Welcome, admin!' });
+        } else {
+            res.status(403).json({ success: false, error: 'Forbidden', message: 'Not authorised' });
+        }
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: 'Internal server error',
+            message: 'Failed to process admin request'
+        });
     }
 });
 

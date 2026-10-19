@@ -17,7 +17,6 @@ tags:
 
 paths:
   /api/daily-menu:
-    get:
       tags: [Menu]
       summary: Get the daily menu
       operationId: getDailyMenu

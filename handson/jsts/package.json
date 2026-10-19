@@ -2,7 +2,8 @@
   "name": "awesome-pizza-jsts",
   "version": "1.0.0",
   "scripts": {
-    "start": "tsx --env-file-if-exists=.env src/api/server.ts"
+    "start": "tsx --env-file-if-exists=.env src/api/server.ts",
+    "test": "vitest run"
   },
   "repository": {
     "type": "git",
@@ -19,7 +20,8 @@
   "devDependencies": {
     "@types/node": "^26.1.1",
     "tsx": "^4.23.1",
-    "typescript": "^7.0.2"
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.5"
   },
   "dependencies": {
     "@types/express": "^5.0.6",

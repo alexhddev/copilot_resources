@@ -5,15 +5,15 @@ import { initDatabase, getDailyMenu, getOrders, findOrderById, addOrder, updateO
 
 // Token payload: base64({"role":"admin"})
 // To generate: Buffer.from(JSON.stringify({ role: 'admin' })).toString('base64')
-const HARDCODED_TOKEN = 'eyJyb2xlIjoiYWRtaW4ifQ==';
+export const HARDCODED_TOKEN = 'eyJyb2xlIjoiYWRtaW4ifQ==';
 
-function extractBearerToken(req: Request): string | null {
+export function extractBearerToken(req: Request): string | null {
     const authHeader = req.headers['authorization'];
     if (!authHeader || !authHeader.startsWith('Bearer ')) return null;
     return authHeader.slice(7);
 }
 
-function requireToken(req: Request, res: Response, next: NextFunction): void {
+export function requireToken(req: Request, res: Response, next: NextFunction): void {
     const token = extractBearerToken(req);
     if (!token || token !== HARDCODED_TOKEN) {
         res.status(401).json({ success: false, error: 'Unauthorized', message: 'Valid token required' });
@@ -23,7 +23,7 @@ function requireToken(req: Request, res: Response, next: NextFunction): void {
 }
 
 // Returns an error message for the first invalid order item, or null when all items are valid
-function validateOrderItems(contents: unknown[]): string | null {
+export function validateOrderItems(contents: unknown[]): string | null {
     for (const item of contents) {
         if (typeof item !== 'object' || item === null) {
             return 'Each order item must be an object';
@@ -404,16 +404,18 @@ app.get('/api/admin', (req, res) => {
     }
 });
 
-// Start server
-initDatabase()
-    .then(() => {
-        app.listen(PORT, () => {
-            console.log(`🍕 Awesome Pizza API server running on port ${PORT}`);
+// Start server only when run directly, so tests can import the app without a database
+if (require.main === module) {
+    initDatabase()
+        .then(() => {
+            app.listen(PORT, () => {
+                console.log(`🍕 Awesome Pizza API server running on port ${PORT}`);
+            });
+        })
+        .catch(error => {
+            console.error('Failed to initialise MySQL database:', error);
+            process.exit(1);
         });
-    })
-    .catch(error => {
-        console.error('Failed to initialise MySQL database:', error);
-        process.exit(1);
-    });
+}
 
 export default app;

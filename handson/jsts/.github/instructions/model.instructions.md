@@ -14,4 +14,3 @@ applyTo: "src/model/**"
 - Never use `any`; use `unknown` or a specific type.
 - Extract a nested object into its own named type when it is reused or has more than two fields.
 - Derive related types from existing ones (`Pick`, `Omit`, `Partial`, indexed access such as `order['status']`) instead of duplicating fields.
-- type names must start with COOL_API

@@ -9,20 +9,28 @@ Install only the tools for the parts you want to run:
 | Part     | Requires                                                  |
 | -------- | --------------------------------------------------------- |
 | `dotnet` | [.NET 10 SDK](https://dotnet.microsoft.com/download)      |
+| `go`     | [Go 1.22+](https://go.dev/dl/)                            |
 | `java`   | Java 17+ and [Maven](https://maven.apache.org/)           |
 | `jsts`   | [Node.js](https://nodejs.org/)                            |
 | `py`     | [Python 3](https://www.python.org/)                       |
 | `ui`     | [Node.js](https://nodejs.org/)                            |
 
-## Backends (`dotnet`, `java`, `jsts`, `py`)
+## Backends (`dotnet`, `go`, `java`, `jsts`, `py`)
 
-The `dotnet`, `java`, `jsts`, and `py` folders each implement the **same backend API** in a different language/stack. Only run one of them at a time, since they all listen on **http://localhost:3000** by default.
+The `dotnet`, `go`, `java`, `jsts`, and `py` folders each implement the **same backend API** in a different language/stack. Only run one of them at a time, since they all listen on **http://localhost:3000** by default.
 
 ### dotnet
 
 ```bash
 cd dotnet
 dotnet run
+```
+
+### go
+
+```bash
+cd go
+go run .
 ```
 
 ### java

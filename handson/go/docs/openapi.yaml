@@ -1,0 +1,379 @@
+openapi: 3.0.3
+info:
+  title: Awesome Pizza API
+  description: API for browsing the daily pizza menu and managing orders.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+    description: Local development server
+
+tags:
+  - name: Menu
+    description: Daily menu operations
+  - name: Orders
+    description: Order management operations
+  - name: Auth
+    description: Authentication operations
+
+paths:
+  /api/daily-menu:
+    get:
+      tags: [Menu]
+      summary: Get the daily menu
+      operationId: getDailyMenu
+      responses:
+        '200':
+          description: Daily menu retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/MenuEntry'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+
+  /api/orders:
+    post:
+      tags: [Orders]
+      summary: Create a new order
+      operationId: createOrder
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrderRequest'
+      responses:
+        '201':
+          description: Order created successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/Order'
+        '400':
+          description: Bad request - invalid order data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+
+  /api/orders/{id}:
+    get:
+      tags: [Orders]
+      summary: Get an order by ID
+      operationId: getOrderById
+      parameters:
+        - $ref: '#/components/parameters/OrderId'
+      responses:
+        '200':
+          description: Order retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/Order'
+        '400':
+          description: Bad request - order ID is required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '404':
+          description: Order not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+    put:
+      tags: [Orders]
+      summary: Update an existing order
+      operationId: updateOrder
+      parameters:
+        - $ref: '#/components/parameters/OrderId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateOrderRequest'
+      responses:
+        '200':
+          description: Order updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/Order'
+        '400':
+          description: Bad request - invalid update data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '404':
+          description: Order not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+
+  /api/login:
+    post:
+      tags: [Auth]
+      summary: Validate credentials and obtain a bearer token
+      operationId: login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '401':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+
+  /api/protected:
+    get:
+      tags: [Auth]
+      summary: Access protected content (requires bearer token)
+      operationId: getProtectedContent
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Access granted
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        properties:
+                          secretRecipes:
+                            type: array
+                            items:
+                              type: string
+                          staffDiscount:
+                            type: string
+                          vipCode:
+                            type: string
+                          deliveryNote:
+                            type: string
+        '401':
+          description: Unauthorized - valid token required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+
+  /api/admin:
+    get:
+      tags: [Auth]
+      summary: Access admin-only content by decoding the bearer token role
+      operationId: getAdminContent
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Welcome message for admin role
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '401':
+          description: Unauthorized - token required or invalid format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '403':
+          description: Forbidden - not an admin role
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+
+  parameters:
+    OrderId:
+      name: id
+      in: path
+      required: true
+      description: The order ID
+      schema:
+        type: string
+      example: order-001
+
+  schemas:
+    ApiResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+        data: {}
+
+    ApiErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        error:
+          type: string
+        message:
+          type: string
+
+    MenuEntry:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Margherita Pizza
+        description:
+          type: string
+          example: Classic pizza with fresh tomatoes, mozzarella cheese, and basil
+        imageUrl:
+          type: string
+          example: assets/origs/margherita.png
+      required: [name, description, imageUrl]
+
+    OrderItem:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Margherita Pizza
+        quantity:
+          type: integer
+          minimum: 1
+          example: 2
+      required: [name, quantity]
+
+    OrderStatus:
+      type: string
+      enum: [RECEIVED, DELIVERING, DELIVERED, CANCELED]
+
+    Order:
+      type: object
+      properties:
+        id:
+          type: string
+          example: order-001
+        sender:
+          type: string
+          example: John Doe
+        status:
+          $ref: '#/components/schemas/OrderStatus'
+        contents:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+      required: [id, sender, status, contents]
+
+    CreateOrderRequest:
+      type: object
+      properties:
+        sender:
+          type: string
+          example: John Doe
+        contents:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+      required: [sender, contents]
+
+    UpdateOrderRequest:
+      type: object
+      properties:
+        sender:
+          type: string
+        status:
+          $ref: '#/components/schemas/OrderStatus'
+        contents:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+
+    LoginRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          example: user
+        password:
+          type: string
+          format: password
+          example: pass
+      required: [username, password]
+
+    LoginResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        token:
+          type: string
+          description: Bearer token to use for authenticated requests
